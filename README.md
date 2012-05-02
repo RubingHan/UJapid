@@ -52,14 +52,14 @@ Controller
 Template
 <pre>
 	`arg String name	
-	<html>
-	   <head>
-	   	  <title>sample</title>
-	   </head>
-	   <body>
+	&lt;html&gt;
+	   &lt;head&gt;
+	   	  &lt;title>sample&lt;/title&gt;
+	   &lt;/head&gt;
+	   &lt;body&gt;
 	   	   My name is:${name}.
-	   </body>
-	</html>
+	   &lt;/body&gt;
+	&lt;/html&gt;
 </pre>
 
 Output will like this:
