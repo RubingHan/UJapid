@@ -109,7 +109,7 @@ public class TemplateLoaderFileImpl implements UJapidTemplateLoader {
 		template.source = FileUtils.readToEnd(filePath);
 
 		try {
-			compileTemplate(template);
+			UJapidTemplate.compileTemplate(template);
 			templatesCache.put(path, template);
 		} catch (Exception e) {
 
@@ -117,7 +117,7 @@ public class TemplateLoaderFileImpl implements UJapidTemplateLoader {
 					.get(path) : null;
 
 			if (template != null) {
-				compileTemplate(template);
+				UJapidTemplate.compileTemplate(template);
 				template.lastModifyTime = new Date();
 				template.lastSyncTime = new Date();
 				templatesCache.put(path, template);
@@ -199,12 +199,6 @@ public class TemplateLoaderFileImpl implements UJapidTemplateLoader {
 		return cachedTemplate;
 	}
 
-	private synchronized void compileTemplate(UJapidTemplate template) {
-		if (template.hasCompiled()) {
-			return;
-		}
-
-		template.compile();
-	}
+	
 
 }

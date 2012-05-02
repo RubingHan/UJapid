@@ -1,11 +1,14 @@
 package cn.uc.play.japid.util;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +25,10 @@ import org.apache.commons.io.FileExistsException;
  * @date 2012-4-29
  */
 public class FileUtils {
+
+	private FileUtils() {
+	}
+
 	/**
 	 * Read all content from a file.
 	 * 
@@ -36,10 +43,15 @@ public class FileUtils {
 	public static String readToEnd(String filePath, String charsetName)
 			throws IOException {
 		byte[] buffer = new byte[(int) new File(filePath).length()];
-		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
-				filePath));
-		bis.read(buffer);
-		bis.close();
+		BufferedInputStream bis = null;
+		try {
+			bis = new BufferedInputStream(new FileInputStream(filePath));
+			bis.read(buffer);
+		} finally {
+			if (bis != null) {
+				bis.close();
+			}
+		}
 		return new String(buffer, charsetName);
 	}
 
@@ -54,6 +66,45 @@ public class FileUtils {
 	 */
 	public static String readToEnd(String filePath) throws IOException {
 		return FileUtils.readToEnd(filePath, "UTF-8");
+	}
+
+	/**
+	 * Write source to a file.
+	 * 
+	 * @param filePath
+	 *            Target file path.
+	 * @param source
+	 *            Text content.
+	 * @throws IOException
+	 * 
+	 */
+	public static void writeToFile(String filePath, String source)
+			throws IOException {
+		writeToFile(filePath, source, "UTF-8");
+	}
+
+	/**
+	 * Write source to a file.
+	 * 
+	 * @param filePath
+	 *            Target file path.
+	 * @param source
+	 *            Text content.
+	 * @param charsetName
+	 *            Charset name.
+	 * @throws IOException
+	 */
+	public static void writeToFile(String filePath, String source,
+			String charsetName) throws IOException {
+		BufferedOutputStream bos = null;
+
+		try {
+			bos = new BufferedOutputStream(new FileOutputStream(filePath));
+			byte[] b = source.getBytes(charsetName);
+			bos.write(b);
+		} finally {
+			bos.close();
+		}
 	}
 
 	/**
@@ -209,7 +260,7 @@ public class FileUtils {
 
 		int currentLevelIndex = 0;
 		int deleted = 0;
-		
+
 		while (currentLevel != null && currentLevel.length > 0) {
 			File file = currentLevel[currentLevelIndex];
 			if (file.isDirectory()) {

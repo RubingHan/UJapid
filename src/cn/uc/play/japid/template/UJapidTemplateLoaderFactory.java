@@ -17,6 +17,8 @@ import play.Play;
 public class UJapidTemplateLoaderFactory {
 	static UJapidTemplateLoader customTemplateLoader;
 	
+	private UJapidTemplateLoaderFactory(){}
+	
 	/**
 	 * If set a custom TemplateLoader object, the factory will always return this object.
 	 * After setting the TemplateLoader object once, this method will ignore other settings.
@@ -47,12 +49,13 @@ public class UJapidTemplateLoaderFactory {
 		
 		
 		String mode = Play.configuration.getProperty("ujapid.mode", "file").toLowerCase();
+		long nativeCacheExpire = Long.parseLong(Play.configuration.getProperty("ujapid.navitecache.expire","-1"));
 		
 		if (mode.equals("db")){
-			createdTemplateLoader = new TemplateLoaderMysqlImpl();
+			long remoteCacheExpire = Long.parseLong(Play.configuration.getProperty("ujapid.remotecache.expire","-1"));
+			createdTemplateLoader = new TemplateLoaderMysqlImpl(UJapidPlugin.ROOT, nativeCacheExpire, remoteCacheExpire);
 		}else if (mode.equals("file")){
 			String filter = Play.configuration.getProperty("ujapid.filter", UJapidTemplateLoader.FILE_FILTER);
-			long nativeCacheExpire = Long.parseLong(Play.configuration.getProperty("ujapid.navitecache.source.expire","2000"));
 			createdTemplateLoader = new TemplateLoaderFileImpl( UJapidPlugin.ROOT, filter, nativeCacheExpire);
 		}
 		return createdTemplateLoader;

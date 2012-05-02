@@ -169,4 +169,12 @@ public class UJapidTemplate extends Template {
 			return renderWithNamedArgs(argsArray).getText();
 		}
 	}
+	
+	public synchronized static void compileTemplate(UJapidTemplate template) {
+		if (template.hasCompiled()) {
+			return;
+		}
+
+		template.compile();
+	}
 }

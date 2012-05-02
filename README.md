@@ -23,14 +23,22 @@ In application.conf
 # Include UJapid module.
 module.ujapid=/path/to/ujapid
 
-# Template files store mode.:"file", "db", "net".
+# Template files store mode.:"file", "db".
 ujapid.mode=file
 
-# Expire interval of template native cache. The unit is "ms". Default value is 2000. 
-ujapid.nativecache.source.expire=180000
+# Expire interval of template native cache. The unit is "ms". Default value is 180000. Used for all mode.
+ujapid.navitecache.expire=2000
+
+# Expire interval of template remote cache (memcached). The unit is "ms". Default value is 3600000. Used for db mode.
+ujapid.remotecache.expire=10000
 
 # Pattern of file filter. The template loader will load files by this pattern.  
 ujapid.filter=^japidviews/.*(\\.html|\\.json|\\.txt|\\.xml)$
+
+# For db mode.
+memcached=enabled
+memcached.host=127.0.0.1:11211
+db=mysql://username:password@host/database
 </pre>
 
 4.Usage
@@ -51,7 +59,7 @@ public class MyController extends UJapidController {
 
 Template
 <pre>
-`arg String name	
+`args String name	
 &lt;html&gt;
    &lt;head&gt;
    	  &lt;title>sample&lt;/title&gt;
