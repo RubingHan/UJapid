@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="UJapidModule" default="build" basedir=".">
-	<property name="classes.standalone" value="tmp/classes.standalone" />
-	<property name="classes.play" value="tmp/classes.play" />
-	<property name="src" value="src" />
+<project name="UJapid" default="build" basedir=".">
+	<property environment="env" /> 
+	<property name="play.path" value="${env.PLAY_HOME}" /> 
 	<property name="version" value="0.1.0" />
 
 	<target name="check" unless="play.path">
@@ -33,10 +32,10 @@
 				<include name="**/play.static" />
 			</fileset>
 		</copy>
-		<jar destfile="lib/play-UJapidModule-${version}.jar" basedir="tmp/classes">
+		<jar destfile="lib/play-UJapid-${version}.jar" basedir="tmp/classes">
 			<manifest>
 				<section name="Play-module">
-					<attribute name="Specification-Title" value="UJapidModule" />
+					<attribute name="Specification-Title" value="UJapid Module" />
 				</section>
 			</manifest>
 		</jar>
@@ -45,8 +44,9 @@
 
 	<target name="compile" depends="check">
 		<mkdir dir="tmp/classes" />
-		<javac srcdir="src" destdir="tmp/classes" target="1.6" debug="true">
+		<javac srcdir="src" destdir="tmp/classes" target="1.6" debug="true" Includeantruntime="no">
 			<classpath refid="project.classpath" />
+			<compilerarg value="-Xlint:unchecked -Xlint:deprecation" />  
 		</javac>
 	</target>
 

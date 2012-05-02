@@ -115,7 +115,7 @@ public class FileUtils {
 	 * Convert file extension name to newExt.
 	 * 
 	 * @param path
-	 *            File path.Ï
+	 *            File path.
 	 * @param newExt
 	 *            New extension name.
 	 * @return File path with new extension.
