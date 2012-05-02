@@ -18,19 +18,19 @@ There's very little different from Japid's configuration.
 
 In application.conf
 <pre>
-	# Configuration of UJapid
-	# =======================
-	# Include UJapid module.
-	module.ujapid=/path/to/ujapid
+# Configuration of UJapid
+# =======================
+# Include UJapid module.
+module.ujapid=/path/to/ujapid
 
-    # Template files store mode.:"file", "db", "net".
-	ujapid.mode=file
+# Template files store mode.:"file", "db", "net".
+ujapid.mode=file
 
-	# Expire interval of template native cache. The unit is "ms". Default value is 2000. 
-	ujapid.nativecache.source.expire=180000
+# Expire interval of template native cache. The unit is "ms". Default value is 2000. 
+ujapid.nativecache.source.expire=180000
 
-    # Pattern of file filter. The template loader will load files by this pattern.  
-	ujapid.filter=^japidviews/.*(\\.html|\\.json|\\.txt|\\.xml)$
+# Pattern of file filter. The template loader will load files by this pattern.  
+ujapid.filter=^japidviews/.*(\\.html|\\.json|\\.txt|\\.xml)$
 </pre>
 
 h2. Usage
@@ -40,31 +40,31 @@ Your controller must extends cn.uc.play.japid.mvc.UJapidController. Then you sho
 h4. example:
 Controller
 <pre>
-	public class MyController extends UJapidController {
+public class MyController extends UJapidController {
 
-    	public static void index() {
-    		String name = "Robin Han";
-    		renderJapid(name);
-    	}
+	public static void index() {
+		String name = "Robin Han";
+		renderJapid(name);
 	}
+}
 </pre>
 
 Template
 <pre>
-	`arg String name	
-	&lt;html&gt;
-	   &lt;head&gt;
-	   	  &lt;title>sample&lt;/title&gt;
-	   &lt;/head&gt;
-	   &lt;body&gt;
-	   	   My name is:${name}.
-	   &lt;/body&gt;
-	&lt;/html&gt;
+`arg String name	
+&lt;html&gt;
+   &lt;head&gt;
+   	  &lt;title>sample&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+   	   My name is:${name}.
+   &lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
 Output will like this:
 <pre>
-     My name is:Robin Han.
+ My name is:Robin Han.
 </pre>
 
 More template grammar, please read Japid manual documents.
