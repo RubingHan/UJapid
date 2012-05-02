@@ -1,4 +1,4 @@
-h2. Introduction
+1.Introduction
 
 UJapid is a new encapsulation of japid as playframework-module, make japid templates can be stored in database and compiled at runtime (Of course for PROD mode of play).
 
@@ -8,11 +8,11 @@ About Japid Template Engine, you can get some useful information at ：
 
 Yes, UJapid be equivalent to japidplay in Japid Template Engine. But UJapid suport for db store and dynamic compile. You should manage and publish your templates more easier.
 
-h2. Installation
+2.Installation
 
 Download the zip package from Github repository, and decompression it into a directory. Of course you can move it to play/modules dirctory. 
 
-h2. Configuration
+3.Configuration
 
 There's very little different from Japid's configuration.
 
@@ -33,11 +33,11 @@ ujapid.nativecache.source.expire=180000
 ujapid.filter=^japidviews/.*(\\.html|\\.json|\\.txt|\\.xml)$
 </pre>
 
-h2. Usage
+4.Usage
 
 Your controller must extends cn.uc.play.japid.mvc.UJapidController. Then you should using renderJapid() to render template.
 
-h4. example:
+example:
 Controller
 <pre>
 public class MyController extends UJapidController {
