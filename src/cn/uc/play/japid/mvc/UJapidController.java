@@ -3,6 +3,9 @@ package cn.uc.play.japid.mvc;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import cn.bran.japid.compiler.NamedArgRuntime;
 import cn.bran.japid.template.RenderResult;
@@ -29,7 +32,6 @@ import play.mvc.Http.Request;
  * @author Bing Ran<bing_ran@hotmail.com>
  */
 public class UJapidController extends Controller {
-
 	/**
 	 * pickup the Japid renderer in the conventional location and render it.
 	 * Positional match is used to assign values to parameters
@@ -46,10 +48,8 @@ public class UJapidController extends Controller {
 	}
 
 	public static void renderJapidWith(String template, Object... args) {
-		Date dt1 = new Date();
 		RenderResult rr = getRenderResultWith(template, args);
 		JapidResult jr = new JapidResult(rr);
-		System.out.println("dt=" + (new Date().getTime() - dt1.getTime()));
 		throw jr;
 	}
 
@@ -80,6 +80,48 @@ public class UJapidController extends Controller {
 	public static void renderJapidWithEager(String template, Object... args) {
 		throw new JapidResult(getRenderResultWith(template, args)).eval();
 	}
+	
+	/**
+	 * render a text in a RenderResult so it can work with invoke tag in
+	 * templates.
+	 * 
+	 * @param s
+	 */
+	protected static void renderText(String s) {
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-Type", "text/plain; charset=utf-8");
+		render(new RenderResult(headers, new StringBuilder(s), -1L));
+	}
+
+	protected static void renderText(Object o) {
+		String str = o == null ? "" : o.toString();
+		renderText(str);
+	}
+
+	protected static void renderText(int o) {
+		renderText(new Integer(o));
+	}
+
+	protected static void renderText(long o) {
+		renderText(new Long(o));
+	}
+
+	protected static void renderText(float o) {
+		renderText(new Float(o));
+	}
+
+	protected static void renderText(double o) {
+		renderText(new Double(o));
+	}
+
+	protected static void renderText(boolean o) {
+		renderText(new Boolean(o));
+	}
+
+	protected static void renderText(char o) {
+		renderText(new String(new char[] { o }));
+	}
+
 
 	protected static String template() {
 		// the super.template() class uses current request object to determine
@@ -219,5 +261,4 @@ public class UJapidController extends Controller {
 			throw new RuntimeException(e);
 		}
 	}
-
 }

@@ -15,6 +15,7 @@ import play.templates.JavaExtensions;
 
 import cn.bran.japid.classmeta.AbstractTemplateClassMetaData;
 import cn.bran.japid.compiler.JapidTemplateTransformer;
+import cn.bran.play.JapidPlayAdapter;
 import cn.bran.play.NoEnhance;
 import cn.uc.play.japid.UJapidPlugin;
 
@@ -117,6 +118,7 @@ public class UJapidTemplateCompiler {
 	}
 
 	public void resetImports() {
+		importStatic(JapidPlayAdapter.class);
 		importStatic(Validation.class);
 		importStatic(JavaExtensions.class);
 		addAnnotation(NoEnhance.class);
