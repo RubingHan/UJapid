@@ -42,6 +42,7 @@ db=mysql://username:password@host/database
 </pre>
 
 4.DB Table and Memcache
+
 If you want to use db mode, create TEMPLATE table in DB with sql script below. 
 <pre>
 CREATE TABLE `TEMPLATE` (
