@@ -57,15 +57,21 @@ CREATE TABLE `TEMPLATE` (
 </pre>
 
 5. Template data procedure in db mode.
+
  1) On application staring, UJapid load all templates from db, set theirs last modified time into memcached, and compiled them;
+
  2) On a request procedure, UJapid get template from native cache first;
+
  3) If the themplate in native cache has been expired, check the last modified time in memcached. If it has been expired, reload the template from db;
+ 
  4) You can modify and publish the templates in your managment console system. You must update last modified time in db and memcached.
 
 6. Coding
+
 Your controller must extends cn.uc.play.japid.mvc.UJapidController. Then you should using renderJapid() to render template.
 
 example:
+
 Controller
 <pre>
 public class MyController extends UJapidController {
