@@ -56,7 +56,8 @@ CREATE TABLE `TEMPLATE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 </pre>
 
-5. Template data procedure in db mode.
+
+5.Template data procedure in db mode.
 
  1) On application staring, UJapid load all templates from db, set theirs last modified time into memcached, and compiled them;
 
@@ -66,7 +67,8 @@ CREATE TABLE `TEMPLATE` (
  
  4) You can modify and publish the templates in your managment console system. You must update last modified time in db and memcached.
 
-6. Coding
+
+6.Coding
 
 Your controller must extends cn.uc.play.japid.mvc.UJapidController. Then you should using renderJapid() to render template.
 
