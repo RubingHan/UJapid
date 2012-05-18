@@ -15,7 +15,6 @@ import cn.uc.play.japid.exception.InvalidArgumentException;
 import cn.uc.play.japid.exception.TemplateCompileException;
 import cn.uc.play.japid.util.FileUtils;
 
-import com.sun.tools.corba.se.idl.InvalidArgument;
 
 import play.Logger;
 import play.Play;

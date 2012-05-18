@@ -27,7 +27,6 @@ import play.classloading.ApplicationClasses.ApplicationClass;
 import play.exceptions.TemplateExecutionException;
 import play.templates.Template;
 import play.vfs.VirtualFile;
-import sun.tools.java.Package;
 
 /**
  * A japid template encapsulation.
