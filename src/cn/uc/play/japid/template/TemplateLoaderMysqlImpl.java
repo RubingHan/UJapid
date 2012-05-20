@@ -102,7 +102,7 @@ public class TemplateLoaderMysqlImpl implements UJapidTemplateLoader {
 
 	private UJapidTemplate createTemplateFromResultSet(ResultSet rs)
 			throws SQLException {
-		Date lastModifyTime = rs.getDate("last_modify");
+		Date lastModifyTime = rs.getTimestamp("last_modify");
 		String path = rs.getString("id");
 
 		UJapidTemplate templateInNativeCache = templatesCache.get(path);
