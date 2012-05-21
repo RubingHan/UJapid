@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface UJapidTemplateLoader {
 	
-	final String FILE_FILTER = "^japidviews/.*(\\.html|\\.json|\\.txt|\\.xml)$";
+	final String FILE_FILTER = "^japidviews(\\\\|/).*(\\.html|\\.json|\\.txt|\\.xml)$";
 	
 	/**
 	 * Get single template by path.
