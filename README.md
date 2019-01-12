@@ -63,7 +63,7 @@ CREATE TABLE `TEMPLATE` (
 
  2) On a request procedure, UJapid get template from native cache first;
 
- 3) If the themplate in native cache has been expired, check the last modified time in memcached. If it has been expired, reload the template from db;
+ 3) If the template in native cache has been expired, check the last modified time in memcached. If it has been expired, reload the template from db;
  
  4) You can modify and publish the templates in your managment console system. You must update last modified time in db and memcached.
 
